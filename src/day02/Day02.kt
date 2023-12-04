@@ -37,8 +37,9 @@ fun main() {
             }
 
     // test if implementation meets criteria from the description, like:
-    check(part1(readInput("/day02/Day02_test")) == 8)
-    check(part2(readInput("/day02/Day02_test")) == 2286)
+    val testInput = readInput("/day02/Day02_test")
+    check(part1(testInput) == 8)
+    check(part2(testInput) == 2286)
 
     val input = readInput("/day02/Day02")
     part1(input).println() //answer: 2256
