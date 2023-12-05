@@ -3,6 +3,7 @@ package day04
 import println
 import readInput
 import java.util.*
+import kotlin.math.pow
 
 
 class LotteryService(val winCards: Map<Int, LotteryCard>) {
@@ -15,7 +16,7 @@ class LotteryService(val winCards: Map<Int, LotteryCard>) {
         var cardCounter = 0
         while (queue.isNotEmpty()) {
             val lotteryCard = queue.poll()
-            val matchingNumbers = intersectNumbers(lotteryCard).count()
+            val matchingNumbers = intersectNumbers(lotteryCard).size
 
             if (matchingNumbers != 0) {
                 for (i in lotteryCard.id..<lotteryCard.id + matchingNumbers) {
@@ -32,9 +33,9 @@ class LotteryService(val winCards: Map<Int, LotteryCard>) {
 
     fun playForPoints(playerCards: List<LotteryCard>): Int =
         //sumOf bug - https://youtrack.jetbrains.com/issue/KT-46360
-        playerCards.map(::intersectNumbers).map {
-            if (it.isNotEmpty()) it.fold(0) { acc, _ -> if (acc == 0) 1 else acc * 2 } else 0
-        }.sum()
+        playerCards.map(::intersectNumbers).sumOf {
+            if (it.isNotEmpty()) 2.0.pow(it.size - 1).toInt() else 0
+        }
 
     private fun intersectNumbers(playerCard: LotteryCard): Set<Int> =
         winCards[playerCard.id]?.let { winCard -> playerCard.numbers.intersect(winCard.numbers.toSet()) } ?: emptySet()
