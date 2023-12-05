@@ -19,12 +19,9 @@ class LotteryService(val winCards: Map<Int, LotteryCard>) {
             val matchingNumbers = intersectNumbers(lotteryCard).size
 
             if (matchingNumbers != 0) {
-                for (i in lotteryCard.id..<lotteryCard.id + matchingNumbers) {
-                    playerCards[i].also {
-                        queue.add(it)
-                        cardCounter++
-                    }
-                }
+                val copies = playerCards.subList(lotteryCard.id, lotteryCard.id + matchingNumbers)
+                queue.addAll(copies)
+                cardCounter += copies.size
             }
         }
 
@@ -38,7 +35,7 @@ class LotteryService(val winCards: Map<Int, LotteryCard>) {
         }
 
     private fun intersectNumbers(playerCard: LotteryCard): Set<Int> =
-        winCards[playerCard.id]?.let { winCard -> playerCard.numbers.intersect(winCard.numbers.toSet()) } ?: emptySet()
+        playerCard.numbers.intersect(winCards[playerCard.id]!!.numbers.toSet())
 }
 
 data class LotteryCard(val id: Int, val numbers: List<Int>)
