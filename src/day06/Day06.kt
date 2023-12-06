@@ -7,8 +7,10 @@ import readInput
 fun main() {
 
     fun Pair<Long, Long>.numOfWaysToWin(): Int =
-        let { (time, distance) ->
-            (0..time).map { i -> if ((time - i) * i > distance) 1 else 0 }.sum()
+        let { (timeToTravel, distance) ->
+            (0..timeToTravel)
+                .map { chargeTime -> if ((timeToTravel - chargeTime) * chargeTime > distance) 1 else 0 }
+                .sum()
         }
 
     fun part1(input: List<String>): Int =
