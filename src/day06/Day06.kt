@@ -7,8 +7,7 @@ import readInput
 fun main() {
 
     fun Pair<Long, Long>.numOfWaysToWin(): Int =
-        let {
-            val (time, distance) = it
+        let { (time, distance) ->
             (0..time).map { i -> if ((time - i) * i > distance) 1 else 0 }.sum()
         }
 
