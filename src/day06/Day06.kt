@@ -8,9 +8,7 @@ fun main() {
 
     fun Pair<Long, Long>.numOfWaysToWin(): Int =
         let {
-            val time = it.first
-            val distance = it.second
-
+            val (time, distance) = it
             LongRange(1, time).map { i -> if ((time - i) * i > distance) 1 else 0 }.sum()
         }
 
