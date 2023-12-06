@@ -9,7 +9,7 @@ fun main() {
     fun Pair<Long, Long>.numOfWaysToWin(): Int =
         let {
             val (time, distance) = it
-            LongRange(1, time).map { i -> if ((time - i) * i > distance) 1 else 0 }.sum()
+            (0..time).map { i -> if ((time - i) * i > distance) 1 else 0 }.sum()
         }
 
     fun part1(input: List<String>): Int =
