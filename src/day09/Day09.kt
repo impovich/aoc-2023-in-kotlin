@@ -17,15 +17,15 @@ fun main() {
     }
 
     fun part1(input: List<String>): Int =
-        input.parse()
-            .sumOf { list ->
-                toSequences(list).sumOf { it.last() }
-            }
+        input.parse().sumOf { list ->
+            toSequences(list).sumOf { it.last() }
+        }
 
     fun part2(input: List<String>): Int =
-        input.parse()
-            .map { toSequences(it).reversed().fold(0) { acc, diff -> diff.first() - acc } }
-            .sum()
+        //sumOf bug - https://youtrack.jetbrains.com/issue/KT-46360
+        input.parse().sumOf { list ->
+            toSequences(list).reversed().fold(0) { acc, diff -> diff.first() - acc } as Int
+        }
 
     // test if implementation meets criteria from the description, like:
     val testInput = readInput("/day09/Day09_test")
