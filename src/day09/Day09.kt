@@ -8,11 +8,10 @@ fun main() {
 
     fun toSequences(current: List<Int>, sequences: MutableList<List<Int>> = mutableListOf()): List<List<Int>> {
         sequences.add(current)
+
         if (current.all { it == 0 }) return sequences
 
-        val sequence = current.asSequence()
-            .windowed(2, 1)
-            .map { it.last() - it.first() }.toList()
+        val sequence = current.zipWithNext { a, b -> b - a }
 
         return toSequences(sequence, sequences)
     }
