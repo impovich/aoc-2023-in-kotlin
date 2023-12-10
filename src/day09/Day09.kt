@@ -10,7 +10,8 @@ fun main() {
         sequences.add(current)
         if (current.all { it == 0 }) return sequences
 
-        val sequence = current.windowed(2, 1)
+        val sequence = current.asSequence()
+            .windowed(2, 1)
             .map { it.last() - it.first() }.toList()
 
         return toSequences(sequence, sequences)
