@@ -22,9 +22,8 @@ fun main() {
         }
 
     fun part2(input: List<String>): Int =
-        //sumOf bug - https://youtrack.jetbrains.com/issue/KT-46360
         input.parse().sumOf { list ->
-            toSequences(list).reversed().fold(0) { acc, diff -> diff.first() - acc } as Int
+            toSequences(list).reversed().map { it.first() }.reduce { acc, i -> i - acc }
         }
 
     // test if implementation meets criteria from the description, like:
